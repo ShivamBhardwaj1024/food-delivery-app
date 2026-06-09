@@ -1,6 +1,6 @@
 // const userModel = require(`../models/user.model`);
 // const foodpartnerModel = require(`../models/foodpartner.model`);
-// const bcrypt = require(`bcrypt`);
+const bcrypt = require(`bcrypt`);
 const jwt = require(`jsonwebtoken`);
 const authDAO = require(`../data access object(DAO)/auth.dao`);
 const validation = require(`../validations/auth.validation`)
@@ -10,13 +10,13 @@ async function registerUser(req,res) {
     const error = await validation.registerUserValidation(req.body);
     
 
-    // const {fullName , email , password} = req.body;
+    const {fullName , email , password} = req.body;
 
-    // if (!fullName || !email || !password) {
-    //     return res.status(400).json({ 
-    //         message: "All fields required" 
-    //     });
-    // }
+    if (!fullName || !email || !password) {
+        return res.status(400).json({ 
+            message: "All fields required" 
+        });
+    }
 
     if (error) {
         return res.status(400).json({
