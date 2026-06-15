@@ -247,6 +247,13 @@ async function foodpartnerLogout(req, res) {
   });
 }
 
+async function getUserDetails(req, res) {
+  res.status(200).json({
+    user: req.user,
+    success: true,
+  });
+}
+
 module.exports = {
   registerUser,
   loginUser,
@@ -254,4 +261,5 @@ module.exports = {
   foodpartnerRegister,
   foodpartnerLogin,
   foodpartnerLogout,
+  getUserDetails,
 };
