@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -8,7 +9,23 @@ export default function Login() {
 
   const handleSubmit = () => {
     setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 2000);
+    fetch("http://localhost:3000/api/auth/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+      withCredentials: true,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.user) {
+          <Navigate to="/" replace />;
+        }
+        setIsLoading(false);
+      });
+
   };
 
   return (
